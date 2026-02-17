@@ -23,8 +23,14 @@ export function ConfigButton({
 
   return (
     <div
-      className="h-10 border pointer-events-auto fixed bottom-2 right-2 bg-white/66 
-    shadow-sm flex items-center pl-[0.9em] pr-1">
+      style={{
+        position: 'fixed',
+        bottom: 8,
+        right: 8,
+        zIndex: 9999,
+        pointerEvents: 'auto',
+      }}
+      className="h-10 border bg-white/66 shadow-sm flex items-center pl-[0.9em] pr-1">
       <span className="font-medium text-sm-button tracking-wide pr-2">Configurar</span>
 
       <div className="h-full flex items-center gap-1">

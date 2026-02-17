@@ -41,11 +41,16 @@ function RowGridCore({ show, setShow }: Props) {
     <div>
       <div
         ref={containerRef}
-        className="fixed w-full pointer-events-none flex justify-center"
         style={{
+          position: "fixed",
           top: 100,
           left: 0,
+          width: "100%",
           height,
+          pointerEvents: "none",
+          display: "flex",
+          justifyContent: "center",
+          zIndex: 9998,
         }}
       >
         {/* linhas */}
@@ -92,19 +97,25 @@ export function RowGrid() {
   const [show, setShow] = useState(false);
 
   return (
-    <div className="fixed z-7000 bottom-0 left-0 min-h-screen w-full">
+    <>
       <Button
         size="sm"
         variant="ghost"
-        style={{ visibility: show ? "hidden" : "visible" }}
+        style={{
+          visibility: show ? "hidden" : "visible",
+          position: "fixed",
+          bottom: 8,
+          right: 8,
+          zIndex: 9999,
+        }}
         onClick={() => setShow((v) => !v)}
-        className="fixed bottom-2 right-2 z-50 text-xs bg-white/66 "
+        className="text-xs bg-white/66"
       >
         Mostrar linhas
         <Icon Icon={Eye} />
       </Button>
 
       <RowGridCore setShow={setShow} show={show} />
-    </div>
+    </>
   );
 }

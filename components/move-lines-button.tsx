@@ -35,8 +35,14 @@ export function MoveLinesButton({ targetRef }: { targetRef: RefObject<HTMLDivEle
 
   return (
     <div
-      className="pointer-events-auto absolute left-1/2 top-[44%]
-        -translate-x-1/2 -translate-y-1/2">
+      style={{
+        position: 'absolute',
+        left: '50%',
+        top: '44%',
+        transform: 'translate(-50%, -50%)',
+        pointerEvents: 'auto',
+      }}
+    >
       <Button
         size="icon-sm"
         data-black

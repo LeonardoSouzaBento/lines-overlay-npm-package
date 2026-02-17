@@ -41,5 +41,5 @@ function RowGridCore({ show, setShow }) {
 }
 export function RowGrid() {
     const [show, setShow] = useState(false);
-    return (_jsxs("div", { className: "relative z-7000 fixed bottom-0 left-0 min-h-screen w-full", children: [_jsxs(Button, { size: "sm", variant: "ghost", style: { visibility: show ? "hidden" : "visible" }, onClick: () => setShow((v) => !v), className: "fixed bottom-2 right-2 z-50 text-xs bg-white/66 ", children: ["Mostrar linhas", _jsx(Icon, { Icon: Eye })] }), _jsx(RowGridCore, { setShow: setShow, show: show })] }));
+    return (_jsxs("div", { className: "fixed z-7000 bottom-0 left-0 min-h-screen w-full", children: [_jsxs(Button, { size: "sm", variant: "ghost", style: { visibility: show ? "hidden" : "visible" }, onClick: () => setShow((v) => !v), className: "fixed bottom-2 right-2 z-50 text-xs bg-white/66 ", children: ["Mostrar linhas", _jsx(Icon, { Icon: Eye })] }), _jsx(RowGridCore, { setShow: setShow, show: show })] }));
 }
