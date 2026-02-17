@@ -1,6 +1,6 @@
 # lines-overlay
 
-Esse é um componente React que desenha linhas horizontais sobre a tela para ajudar desenvolvedores front-end a conferir alinhamentos e espaçamentos verticais de elementos de interface.
+Esse é um componente React que desenha linhas horizontais sobre a tela para ajudar desenvolvedores front-end a conferir alinhamentos e espaçamentos verticais de elementos de interface. Instale com "npm i lines-overlay -D".
 
 📦 npm: https://www.npmjs.com/package/lines-overlay
 
@@ -10,11 +10,11 @@ Esse é um componente React que desenha linhas horizontais sobre a tela para aju
 
 Com npm:
 ```bash
-npm install lines-overlay
+npm i lines-overlay -D
 ```
 Ou com pnpm:
 ```bash
-pnpm add lines-overlay
+pnpm add lines-overlay -D
 ```
 
 Este pacote assume que o seu projeto já usa:
