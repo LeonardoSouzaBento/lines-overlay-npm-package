@@ -3,11 +3,11 @@
   "version": "0.1.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SEU_USUARIO/lines-overlay.git"
+    "url": "https://github.com/LeonardoSouzaBento/lines-overlay-npm-package.git"
   },
-  "homepage": "https://github.com/SEU_USUARIO/lines-overlay#readme",
+  "homepage": "https://github.com/LeonardoSouzaBento/lines-overlay-npm-package#readme",
   "bugs": {
-    "url": "https://github.com/SEU_USUARIO/lines-overlay/issues"
+    "url": "https://github.com/LeonardoSouzaBento/lines-overlay-npm-package/issues"
   },
   "description": "Overlay de linhas configuráveis para interfaces React.",
   "license": "MIT",
