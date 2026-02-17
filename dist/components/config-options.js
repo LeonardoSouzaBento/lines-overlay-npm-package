@@ -6,6 +6,7 @@ const css = {
         position: 'fixed',
         bottom: 52,
         right: 8,
+        zIndex: 1000,
         pointerEvents: 'auto',
         fontSize: '0.875rem',
         backgroundColor: 'rgba(255,255,255,0.94)',
@@ -35,6 +36,7 @@ const css = {
         display: 'flex',
         alignItems: 'flex-end',
         gap: 8,
+        borderRadius: 6,
     },
     inputWrapper: {
         width: 104,

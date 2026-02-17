@@ -1,6 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
 const styles = {
     base: {
         width: 'auto',
@@ -66,6 +65,21 @@ export function resolveButtonStyles({ variant, size, selected, disabled, closeBu
         ...style,
     };
 }
+const Slot = React.forwardRef(({ children, className, style, ...slotProps }, ref) => {
+    if (!children || !React.isValidElement(children)) {
+        return null;
+    }
+    const child = children;
+    const mergedClassName = [className, child.props.className].filter(Boolean).join(' ');
+    const mergedStyle = { ...style, ...child.props.style };
+    return React.cloneElement(child, {
+        ...slotProps,
+        ...child.props,
+        className: mergedClassName || undefined,
+        style: mergedStyle,
+        ref,
+    });
+});
 export const Button = React.forwardRef(({ className, variant = 'default', size = 'default', asChild = false, selected = false, disabled = false, closeButton = false, style, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
     return (_jsx(Comp, { ref: ref, className: className, disabled: disabled, style: resolveButtonStyles({

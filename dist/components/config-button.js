@@ -12,7 +12,7 @@ const css = {
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'rgba(148,163,184,0.8)',
-        backgroundColor: 'rgba(255,255,255,0.66)',
+        backgroundColor: 'rgba(255,255,255,0.70)',
         boxShadow: '0 1px 3px rgba(15,23,42,0.2)',
         display: 'flex',
         alignItems: 'center',

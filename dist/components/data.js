@@ -2,7 +2,7 @@ export const NUMBER_FIELDS = [
     {
         key: 'lines',
         label: 'Linhas',
-        quick: [8, 12, 16, 24],
+        quick: [2, 4, 8, 12],
         step: 4,
     },
     {

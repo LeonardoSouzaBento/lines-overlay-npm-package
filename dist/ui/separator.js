@@ -1,6 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import * as React from 'react';
-import * as SeparatorPrimitive from '@radix-ui/react-separator';
 const css = {
     base: {
         flexShrink: 0,
@@ -17,7 +16,13 @@ const css = {
 };
 const Separator = React.forwardRef(({ className, orientation = 'horizontal', decorative = true, style, ...props }, ref) => {
     const dimensionStyle = orientation === 'horizontal' ? css.horizontal : css.vertical;
-    return (_jsx(SeparatorPrimitive.Root, { ref: ref, decorative: decorative, orientation: orientation, style: { ...css.base, ...dimensionStyle, ...style }, className: className, ...props }));
+    const ariaProps = decorative
+        ? { role: 'none' }
+        : {
+            role: 'separator',
+            'aria-orientation': orientation,
+        };
+    return (_jsx("div", { ref: ref, style: { ...css.base, ...dimensionStyle, ...style }, className: className, ...ariaProps, ...props }));
 });
-Separator.displayName = SeparatorPrimitive.Root.displayName;
+Separator.displayName = 'Separator';
 export { Separator };
