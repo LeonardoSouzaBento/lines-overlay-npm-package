@@ -92,7 +92,7 @@ export function RowGrid() {
   const [show, setShow] = useState(false);
 
   return (
-    <div className="relative z-7000 fixed bottom-0 left-0 min-h-screen w-full">
+    <div className="fixed z-7000 bottom-0 left-0 min-h-screen w-full">
       <Button
         size="sm"
         variant="ghost"
