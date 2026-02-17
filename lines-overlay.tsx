@@ -13,6 +13,30 @@ type Props = {
   show: boolean;
 };
 
+const css = {
+  overlay: {
+    position: 'fixed' as const,
+    top: 100,
+    left: 0,
+    width: '100%',
+    pointerEvents: 'none' as const,
+    display: 'flex',
+    justifyContent: 'center',
+    zIndex: 9998,
+  },
+  grid: {
+    width: '100%',
+  },
+  triggerButton: {
+    position: 'fixed' as const,
+    bottom: 8,
+    right: 8,
+    zIndex: 9999,
+    fontSize: '0.75rem',
+    backgroundColor: 'rgba(255,255,255,0.66)',
+  },
+} as const;
+
 function RowGridCore({ show, setShow }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -41,22 +65,12 @@ function RowGridCore({ show, setShow }: Props) {
     <div>
       <div
         ref={containerRef}
-        style={{
-          position: "fixed",
-          top: 100,
-          left: 0,
-          width: "100%",
-          height,
-          pointerEvents: "none",
-          display: "flex",
-          justifyContent: "center",
-          zIndex: 9998,
-        }}
+        style={{ ...css.overlay, height }}
       >
         {/* linhas */}
         <div
-          className="w-full"
           style={{
+            ...css.grid,
             height,
             backgroundImage: `repeating-linear-gradient(
                 to bottom,
@@ -101,15 +115,8 @@ export function RowGrid() {
       <Button
         size="sm"
         variant="ghost"
-        style={{
-          visibility: show ? "hidden" : "visible",
-          position: "fixed",
-          bottom: 8,
-          right: 8,
-          zIndex: 9999,
-        }}
+        style={{ ...css.triggerButton, visibility: show ? 'hidden' : 'visible' }}
         onClick={() => setShow((v) => !v)}
-        className="text-xs bg-white/66"
       >
         Mostrar linhas
         <Icon Icon={Eye} />

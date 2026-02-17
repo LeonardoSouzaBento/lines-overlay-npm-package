@@ -2,6 +2,21 @@ import { Move } from 'lucide-react';
 import { useRef, type MouseEvent as ReactMouseEvent, type RefObject } from 'react';
 import { Button, Icon } from '../ui';
 
+const css = {
+  wrapper: {
+    position: 'absolute' as const,
+    left: '50%',
+    top: '44%',
+    transform: 'translate(-50%, -50%)',
+    pointerEvents: 'auto',
+  },
+  button: {
+    borderRadius: 9999,
+    backgroundColor: 'rgba(255,255,255,0.75)',
+    backdropFilter: 'blur(2px)',
+  },
+} as const;
+
 export function MoveLinesButton({ targetRef }: { targetRef: RefObject<HTMLDivElement | null> }) {
   const dragging = useRef(false);
   const last = useRef({ x: 0, y: 0 });
@@ -34,21 +49,13 @@ export function MoveLinesButton({ targetRef }: { targetRef: RefObject<HTMLDivEle
   }
 
   return (
-    <div
-      style={{
-        position: 'absolute',
-        left: '50%',
-        top: '44%',
-        transform: 'translate(-50%, -50%)',
-        pointerEvents: 'auto',
-      }}
-    >
+    <div style={css.wrapper}>
       <Button
         size="icon-sm"
         data-black
         variant="ghost"
         onMouseDown={onMouseDown}
-        className="rounded-full bg-white/75 backdrop-blur-xs">
+        style={css.button}>
         <Icon Icon={Move} size="lg" strokeWidth="thin" />
       </Button>
     </div>

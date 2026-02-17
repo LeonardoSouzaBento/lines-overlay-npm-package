@@ -3,6 +3,41 @@ import { MouseEvent } from 'react';
 import { StateSetter } from '../types';
 import { Button, Icon, Separator } from '../ui/index';
 
+const css = {
+  container: {
+    position: 'fixed',
+    bottom: 8,
+    right: 8,
+    zIndex: 9999,
+    pointerEvents: 'auto',
+    height: 40,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'rgba(148,163,184,0.8)',
+    backgroundColor: 'rgba(255,255,255,0.66)',
+    boxShadow: '0 1px 3px rgba(15,23,42,0.2)',
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: 14,
+    paddingRight: 4,
+  },
+  label: {
+    fontWeight: 500,
+    fontSize: '0.8125rem',
+    letterSpacing: '0.03em',
+    paddingRight: 8,
+  },
+  buttonsRow: {
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    gap: 4,
+  },
+  closeIcon: {
+    color: '#dc2626',
+  },
+} as const;
+
 export function ConfigButton({
   onToggleConfig,
   open,
@@ -22,18 +57,12 @@ export function ConfigButton({
   };
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        bottom: 8,
-        right: 8,
-        zIndex: 9999,
-        pointerEvents: 'auto',
-      }}
-      className="h-10 border bg-white/66 shadow-sm flex items-center pl-[0.9em] pr-1">
-      <span className="font-medium text-sm-button tracking-wide pr-2">Configurar</span>
+    <div style={css.container}>
+      <span style={css.label}>
+        Configurar
+      </span>
 
-      <div className="h-full flex items-center gap-1">
+      <div style={css.buttonsRow}>
         {[1, 2, 3].map((item) =>
           item !== 2 ? (
             <Button
@@ -47,7 +76,7 @@ export function ConfigButton({
               {item === 1 ? (
                 <Icon Icon={open ? ChevronDown : ChevronUp} size={'xl'} strokeWidth="light" />
               ) : (
-                <Icon Icon={X} size="sm" className="text-red-600" strokeWidth="light" />
+                <Icon Icon={X} size="sm" strokeWidth="light" className={undefined} />
               )}
             </Button>
           ) : (

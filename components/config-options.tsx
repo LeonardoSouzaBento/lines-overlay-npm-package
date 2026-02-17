@@ -2,12 +2,88 @@ import { Button } from '../ui';
 import { ConfigOptionsProps, NUMBER_FIELDS, colorOptions } from './data';
 
 const css = {
-  container: `text-sm pointer-events-auto fixed bottom-13 right-2 
-      bg-white/94 backdrop-blur-sm shadow-md border border-border/50 p-3 pt-2 w-auto flex flex-col gap-2
-      [&>div]:flex [&>div]:gap-2`,
-  wrapper: `flex items-end gap-2`,
-  inputWrapper: `[&>input]:h-8 w-26`,
-};
+  container: {
+    position: 'fixed',
+    bottom: 52,
+    right: 8,
+    pointerEvents: 'auto',
+    fontSize: '0.875rem',
+    backgroundColor: 'rgba(255,255,255,0.94)',
+    backdropFilter: 'blur(4px)',
+    boxShadow: '0 4px 6px rgba(15,23,42,0.12)',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'rgba(148,163,184,0.5)',
+    paddingInline: 12,
+    paddingBlock: 8,
+    width: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 8,
+  },
+  fieldRow: {
+    width: '100%',
+    borderBottomWidth: 1,
+    borderBottomStyle: 'solid',
+    borderBottomColor: 'rgba(148,163,184,0.4)',
+    paddingBottom: 12,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 4,
+  },
+  wrapper: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    gap: 8,
+  },
+  inputWrapper: {
+    width: 104,
+  },
+  label: {
+    display: 'block',
+    fontSize: '0.75rem',
+    fontWeight: 500,
+    marginBottom: 4,
+  },
+  numberInput: {
+    width: '100%',
+    height: 32,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#e5e7eb',
+    paddingInline: 8,
+    fontSize: '0.875rem',
+  },
+  quickRow: {
+    display: 'flex',
+    gap: 5,
+    marginTop: 4,
+  },
+  quickButton: {
+    fontWeight: 500,
+    fontSize: '0.875rem',
+  },
+  colorSection: {
+    marginTop: 8,
+  },
+  colorLabel: {
+    display: 'block',
+    fontSize: '0.75rem',
+    fontWeight: 500,
+    marginBottom: 4,
+  },
+  colorRow: {
+    display: 'flex',
+    gap: 8,
+  },
+  colorDot: {
+    display: 'block',
+    width: '80%',
+    height: '80%',
+    borderRadius: 9999,
+  },
+} as const;
 
 export function ConfigOptions(props: ConfigOptionsProps) {
   const fieldBindings = {
@@ -17,24 +93,24 @@ export function ConfigOptions(props: ConfigOptionsProps) {
   };
 
   return (
-    <div className={css.container}>
+    <div style={css.container}>
       {NUMBER_FIELDS.map((field) => {
         const binding = fieldBindings[field.key];
 
         return (
-          <div className="w-full border-b border-border/66 pb-3" key={field.key}>
-            <div className={css.wrapper}>
-              <div className={css.inputWrapper}>
-                <label className="block text-xs font-medium mb-1">{field.label}</label>
+          <div style={css.fieldRow} key={field.key}>
+            <div style={css.wrapper}>
+              <div style={css.inputWrapper}>
+                <label style={css.label}>{field.label}</label>
                 <input
-                  className="w-full h-8 rounded border border-border px-2 text-sm"
+                  style={css.numberInput}
                   type="number"
                   step={field.step}
                   value={binding.value}
                   onChange={(e) => binding.set(+e.target.value)}
                 />
               </div>
-              <div className="flex gap-1.25 mt-1">
+              <div style={css.quickRow}>
                 {field.quick.map((v) => {
                   return (
                     <Button
@@ -43,7 +119,7 @@ export function ConfigOptions(props: ConfigOptionsProps) {
                       data-option
                       variant="ghost"
                       size="icon-sm"
-                      className="text-sm-button font-medium"
+                      style={css.quickButton}
                       onClick={() => binding.set(v)}>
                       {v}
                     </Button>
@@ -55,18 +131,17 @@ export function ConfigOptions(props: ConfigOptionsProps) {
         );
       })}
 
-      <div className="mt-2">
-        <span className="block text-xs font-medium mb-1">Cor</span>
-        <div className="flex gap-2">
+      <div style={css.colorSection}>
+        <span style={css.colorLabel}>Cor</span>
+        <div style={css.colorRow}>
           {colorOptions.map((c) => (
             <Button
               key={c.value}
               variant="ghost"
               size="icon-sm"
               title={c.name}
-              className="rounded-full"
               onClick={() => props.setColor(c.value)}>
-              <span className="block size-4/5 rounded-full" style={{ backgroundColor: c.value }} />
+              <span style={{ ...css.colorDot, backgroundColor: c.value }} />
             </Button>
           ))}
         </div>

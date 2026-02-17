@@ -1,11 +1,10 @@
 import type { LucideIcon as LucideIconType, LucideProps } from 'lucide-react';
 
 type StrokeWidthValue = keyof typeof weights;
-/* Ajuste depois */
 const weights = {
   thin: 2.25,
   light: 2.35,
-  normal: 2.65, // valor padrão
+  normal: 2.65,
   semibold: 2.75,
   bold: 2.85,
   extrabold: 3,
@@ -30,6 +29,16 @@ const iconSizes = {
   h1: '1.4757em',
 };
 
+const css = {
+  wrapper: {
+    height: '0.75rem',
+    display: 'inline-flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'visible' as const,
+  },
+} as const;
+
 interface IconProps extends Omit<LucideProps, 'size' | 'strokeWidth'> {
   Icon: LucideIconType;
   size?: SizeValue | string;
@@ -38,7 +47,7 @@ interface IconProps extends Omit<LucideProps, 'size' | 'strokeWidth'> {
 
 export const Icon = ({ Icon, size, className, strokeWidth, fill }: IconProps) => {
   return (
-    <div data-icon className="h-3 inline-flex justify-center items-center overflow-visible [&_svg]:shrink-0">
+    <div data-icon style={css.wrapper}>
       <Icon
         size={iconSizes[size as SizeValue] || size || '1.067em'}
         strokeWidth={weights[strokeWidth as StrokeWidthValue] || strokeWidth || 2.6}

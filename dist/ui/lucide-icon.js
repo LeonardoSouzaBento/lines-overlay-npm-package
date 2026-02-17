@@ -1,9 +1,8 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-/* Ajuste depois */
 const weights = {
     thin: 2.25,
     light: 2.35,
-    normal: 2.65, // valor padrão
+    normal: 2.65,
     semibold: 2.75,
     bold: 2.85,
     extrabold: 3,
@@ -24,6 +23,15 @@ const iconSizes = {
     h2: '1.383em',
     h1: '1.4757em',
 };
+const css = {
+    wrapper: {
+        height: '0.75rem',
+        display: 'inline-flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'visible',
+    },
+};
 export const Icon = ({ Icon, size, className, strokeWidth, fill }) => {
-    return (_jsx("div", { "data-icon": true, className: "h-3 inline-flex justify-center items-center overflow-visible [&_svg]:shrink-0", children: _jsx(Icon, { size: iconSizes[size] || size || '1.067em', strokeWidth: weights[strokeWidth] || strokeWidth || 2.6, className: className, fill: fill || 'none' }) }));
+    return (_jsx("div", { "data-icon": true, style: css.wrapper, children: _jsx(Icon, { size: iconSizes[size] || size || '1.067em', strokeWidth: weights[strokeWidth] || strokeWidth || 2.6, className: className, fill: fill || 'none' }) }));
 };

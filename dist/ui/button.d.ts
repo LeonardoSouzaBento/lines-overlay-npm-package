@@ -1,15 +1,22 @@
 import * as React from 'react';
-import { type VariantProps } from 'class-variance-authority';
-export type ButtonVariants = VariantProps<typeof buttonVariants>;
-declare const buttonVariants: (props?: ({
-    variant?: "default" | "outline" | "ghost" | "transparent" | "link" | "secondary" | "destructive" | null | undefined;
-    size?: "default" | "sm" | "lg" | "icon-sm" | "icon" | "icon-md" | "icon-lg" | null | undefined;
-} & import("class-variance-authority/types").ClassProp) | undefined) => string;
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+type ButtonVariant = 'default' | 'ghost' | 'transparent';
+type ButtonSize = 'default' | 'sm' | 'icon-sm';
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     asChild?: boolean;
     selected?: boolean;
     disabled?: boolean;
     closeButton?: boolean;
+    variant?: ButtonVariant;
+    size?: ButtonSize;
 }
-declare const Button: React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
-export { Button };
+type ResolveButtonStyleParams = {
+    variant: ButtonVariant;
+    size: ButtonSize;
+    selected?: boolean;
+    disabled?: boolean;
+    closeButton?: boolean;
+    style?: React.CSSProperties;
+};
+export declare function resolveButtonStyles({ variant, size, selected, disabled, closeButton, style, }: ResolveButtonStyleParams): React.CSSProperties;
+export declare const Button: React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
+export {};

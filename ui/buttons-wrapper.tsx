@@ -1,8 +1,5 @@
 import React, { ReactNode } from 'react';
 
-const cn = (...classes: Array<string | false | null | undefined>) =>
-  classes.filter(Boolean).join(' ');
-
 interface ButtonsWrapperProps {
   children: ReactNode;
   className?: string;
@@ -14,10 +11,18 @@ export const ButtonsWrapper: React.FC<ButtonsWrapperProps> = ({
   className = '',
   gap = 3,
 }) => {
+  const css = {
+    container: {
+      height: 'auto',
+      display: 'flex',
+      flexWrap: 'wrap' as const,
+      alignItems: 'center',
+      gap: `${gap * 0.25}rem`,
+    },
+  } as const;
+
   return (
-    <div
-      style={{ '--custom-gap': `${gap * 0.25}rem` } as React.CSSProperties}
-      className={cn(`h-auto flex flex-wrap items-center gap-(--custom-gap)`, className)}>
+    <div style={css.container} className={className}>
       {children}
     </div>
   );
