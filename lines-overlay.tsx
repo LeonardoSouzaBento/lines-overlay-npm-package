@@ -1,8 +1,12 @@
-import { Eye } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
-import { ConfigButton, ConfigOptions, MoveLinesButton } from './components/index';
-import { StateSetter } from './types';
-import { Button, Icon } from './ui';
+import { Eye } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import {
+  ConfigButton,
+  ConfigOptions,
+  MoveLinesButton,
+} from "./components/index";
+import { StateSetter } from "./types";
+import { Button, Icon } from "./ui";
 
 type Props = {
   setShow: StateSetter<boolean>;
@@ -15,18 +19,18 @@ function RowGridCore({ show, setShow }: Props) {
   const [lines, setLines] = useState(12);
   const [gap, setGap] = useState(24);
   const [opacity, setOpacity] = useState(0.3);
-  const [color, setColor] = useState('#d71212');
+  const [color, setColor] = useState("#d71212");
   const [showConfig, setShowConfig] = useState(false);
 
   // Toggle por tecla
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key === ';') {
+      if (e.ctrlKey && e.key === ";") {
         setShow((v) => !v);
       }
     };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
   }, []);
 
   if (!show) return null;
@@ -42,7 +46,8 @@ function RowGridCore({ show, setShow }: Props) {
           top: 100,
           left: 0,
           height,
-        }}>
+        }}
+      >
         {/* linhas */}
         <div
           className="w-full"
@@ -61,24 +66,24 @@ function RowGridCore({ show, setShow }: Props) {
         {/* Move */}
         <MoveLinesButton targetRef={containerRef} />
       </div>
-              {/* Config */}
-        <ConfigButton
-          setShow={setShow}
-          onToggleConfig={() => setShowConfig((v) => !v)}
-          open={showConfig}
+      {/* Config */}
+      <ConfigButton
+        setShow={setShow}
+        onToggleConfig={() => setShowConfig((v) => !v)}
+        open={showConfig}
+      />
+      {showConfig && (
+        <ConfigOptions
+          lines={lines}
+          gap={gap}
+          opacity={opacity}
+          color={color}
+          setLines={setLines}
+          setGap={setGap}
+          setOpacity={setOpacity}
+          setColor={setColor}
         />
-        {showConfig && (
-          <ConfigOptions
-            lines={lines}
-            gap={gap}
-            opacity={opacity}
-            color={color}
-            setLines={setLines}
-            setGap={setGap}
-            setOpacity={setOpacity}
-            setColor={setColor}
-          />
-        )}
+      )}
     </div>
   );
 }
@@ -87,18 +92,19 @@ export function RowGrid() {
   const [show, setShow] = useState(false);
 
   return (
-    <>
+    <div className="relative z-7000 fixed bottom-0 left-0 min-h-screen w-full">
       <Button
         size="sm"
         variant="ghost"
-        style={{ visibility: show ? 'hidden' : 'visible' }}
+        style={{ visibility: show ? "hidden" : "visible" }}
         onClick={() => setShow((v) => !v)}
-        className="fixed bottom-2 right-2 z-50 text-xs bg-white/66 ">
+        className="fixed bottom-2 right-2 z-50 text-xs bg-white/66 "
+      >
         Mostrar linhas
         <Icon Icon={Eye} />
       </Button>
 
       <RowGridCore setShow={setShow} show={show} />
-    </>
+    </div>
   );
 }
