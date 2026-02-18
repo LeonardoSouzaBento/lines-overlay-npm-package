@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2019",
+    "target": "ES2020",
     "module": "ESNext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
+    "emitDeclarationOnly": false,
     "strict": true,
     "declaration": true,
     "outDir": "dist",
@@ -14,4 +15,3 @@
   "include": ["./**/*"],
   "exclude": ["dist", "node_modules"]
 }
-
