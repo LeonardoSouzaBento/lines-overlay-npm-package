@@ -52,7 +52,7 @@ var styles = {
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-    borderRadius: 6,
+    borderRadius: 4,
     position: "relative",
     outline: "none",
     userSelect: "none"
@@ -313,9 +313,7 @@ var css4 = {
     zIndex: 9999,
     pointerEvents: "auto",
     height: 40,
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "rgba(148,163,184,0.8)",
+    border: "1px solid rgba(148,163,184,0.8)",
     backgroundColor: "rgba(255,255,255,0.70)",
     boxShadow: "0 1px 3px rgba(15,23,42,0.2)",
     display: "flex",
@@ -325,7 +323,7 @@ var css4 = {
   },
   label: {
     fontWeight: 500,
-    fontSize: "0.8125rem",
+    fontSize: "1.21875rem",
     letterSpacing: "0.03em",
     paddingRight: 8
   },
@@ -411,13 +409,12 @@ var css5 = {
     right: 8,
     zIndex: 1e3,
     pointerEvents: "auto",
-    fontSize: "0.875rem",
+    fontSize: "1.3125rem",
     backgroundColor: "rgba(255,255,255,0.94)",
     backdropFilter: "blur(4px)",
     boxShadow: "0 4px 6px rgba(15,23,42,0.12)",
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "rgba(148,163,184,0.5)",
+    border: "1px solid rgba(148,163,184,0.5)",
+    borderRadius: 12,
     paddingInline: 12,
     paddingBlock: 8,
     width: "auto",
@@ -427,9 +424,7 @@ var css5 = {
   },
   fieldRow: {
     width: "100%",
-    borderBottomWidth: 1,
-    borderBottomStyle: "solid",
-    borderBottomColor: "rgba(148,163,184,0.4)",
+    borderBottom: "1px solid rgba(148,163,184,0.4)",
     paddingBottom: 12,
     display: "flex",
     flexDirection: "column",
@@ -439,24 +434,22 @@ var css5 = {
     display: "flex",
     alignItems: "flex-end",
     gap: 8,
-    borderRadius: 6
+    borderRadius: 4
   },
   inputWrapper: {
     width: 104
   },
   label: {
     display: "block",
-    fontSize: "0.75rem",
+    fontSize: "1.125rem",
     fontWeight: 500,
     marginBottom: 4
   },
   numberInput: {
     width: "100%",
     height: 32,
-    borderRadius: 6,
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "#e5e7eb",
+    borderRadius: 4,
+    border: "1px solid #e5e7eb",
     paddingInline: 8,
     fontSize: "0.875rem"
   },
@@ -474,7 +467,7 @@ var css5 = {
   },
   colorLabel: {
     display: "block",
-    fontSize: "0.75rem",
+    fontSize: "1.125rem",
     fontWeight: 500,
     marginBottom: 4
   },
