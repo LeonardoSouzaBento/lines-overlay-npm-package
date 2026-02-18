@@ -15,31 +15,30 @@ type Props = {
 
 const css = {
   overlay: {
-    position: 'fixed' as const,
+    position: "absolute" as const,
     top: 100,
     left: 0,
-    width: '100%',
-    pointerEvents: 'none' as const,
-    display: 'flex',
-    justifyContent: 'center',
-    zIndex: 9998,
+    width: "100%",
+    pointerEvents: "none" as const,
+    display: "flex",
+    justifyContent: "center",
+    zIndex: 10,
   },
   grid: {
-    width: '100%',
+    width: "100%",
   },
   triggerButton: {
-    position: 'fixed' as const,
+    position: "absolute" as const,
     bottom: 8,
     right: 8,
-    zIndex: 9999,
-    fontSize: '0.75rem',
-    backgroundColor: 'rgba(255,255,255,0.66)',
+    zIndex: 20,
+    fontSize: "1rem",
+    backgroundColor: "rgba(255,255,255,0.70)",
   },
 } as const;
 
 function RowGridCore({ show, setShow }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
-
   const [lines, setLines] = useState(12);
   const [gap, setGap] = useState(24);
   const [opacity, setOpacity] = useState(0.3);
@@ -62,11 +61,8 @@ function RowGridCore({ show, setShow }: Props) {
   const height = lines * gap;
 
   return (
-    <div>
-      <div
-        ref={containerRef}
-        style={{ ...css.overlay, height }}
-      >
+    <>
+      <div ref={containerRef} style={{ ...css.overlay, height }}>
         {/* linhas */}
         <div
           style={{
@@ -103,7 +99,7 @@ function RowGridCore({ show, setShow }: Props) {
           setColor={setColor}
         />
       )}
-    </div>
+    </>
   );
 }
 
@@ -111,18 +107,30 @@ export function RowGrid() {
   const [show, setShow] = useState(false);
 
   return (
-    <>
+    <div
+      style={{
+        position: "fixed",
+        zIndex: 9000,
+        bottom: 0,
+        left: 0,
+        width: "100%",
+        height: "100dvh",
+      }}
+    >
+      <RowGridCore setShow={setShow} show={show} />
+
       <Button
         size="sm"
         variant="ghost"
-        style={{ ...css.triggerButton, visibility: show ? 'hidden' : 'visible' }}
+        style={{
+          ...css.triggerButton,
+          visibility: show ? "hidden" : "visible",
+        }}
         onClick={() => setShow((v) => !v)}
       >
         Mostrar linhas
         <Icon Icon={Eye} />
       </Button>
-
-      <RowGridCore setShow={setShow} show={show} />
-    </>
+    </div>
   );
 }

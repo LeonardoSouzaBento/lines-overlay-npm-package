@@ -83,7 +83,6 @@ const css = {
     display: 'block',
     width: '80%',
     height: '80%',
-    borderRadius: 9999,
   },
 } as const;
 

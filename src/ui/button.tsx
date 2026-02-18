@@ -57,7 +57,6 @@ const styles = {
   } satisfies React.CSSProperties,
 
   closeButton: {
-    borderRadius: 9999,
     color: '#0f172a',
   } satisfies React.CSSProperties,
 };

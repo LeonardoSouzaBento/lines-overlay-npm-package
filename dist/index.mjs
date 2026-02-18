@@ -59,7 +59,6 @@ var styles = {
     backgroundColor: "rgba(59,130,246,0.08)"
   },
   closeButton: {
-    borderRadius: 9999,
     color: "#0f172a"
   }
 };
@@ -227,7 +226,6 @@ var css3 = {
     pointerEvents: "auto"
   },
   button: {
-    borderRadius: 9999,
     backgroundColor: "rgba(255,255,255,0.75)",
     backdropFilter: "blur(2px)"
   }
@@ -451,8 +449,7 @@ var css5 = {
   colorDot: {
     display: "block",
     width: "80%",
-    height: "80%",
-    borderRadius: 9999
+    height: "80%"
   }
 };
 function ConfigOptions(props) {
@@ -516,25 +513,25 @@ function ConfigOptions(props) {
 import { Fragment, jsx as jsx7, jsxs as jsxs3 } from "react/jsx-runtime";
 var css6 = {
   overlay: {
-    position: "fixed",
+    position: "absolute",
     top: 100,
     left: 0,
     width: "100%",
     pointerEvents: "none",
     display: "flex",
     justifyContent: "center",
-    zIndex: 9998
+    zIndex: 10
   },
   grid: {
     width: "100%"
   },
   triggerButton: {
-    position: "fixed",
+    position: "absolute",
     bottom: 8,
     right: 8,
-    zIndex: 9999,
-    fontSize: "0.75rem",
-    backgroundColor: "rgba(255,255,255,0.66)"
+    zIndex: 20,
+    fontSize: "1rem",
+    backgroundColor: "rgba(255,255,255,0.70)"
   }
 };
 function RowGridCore({ show, setShow }) {
@@ -555,34 +552,27 @@ function RowGridCore({ show, setShow }) {
   }, []);
   if (!show) return null;
   const height = lines * gap;
-  return /* @__PURE__ */ jsxs3("div", { children: [
-    /* @__PURE__ */ jsxs3(
-      "div",
-      {
-        ref: containerRef,
-        style: { ...css6.overlay, height },
-        children: [
-          /* @__PURE__ */ jsx7(
-            "div",
-            {
-              style: {
-                ...css6.grid,
-                height,
-                backgroundImage: `repeating-linear-gradient(
+  return /* @__PURE__ */ jsxs3(Fragment, { children: [
+    /* @__PURE__ */ jsxs3("div", { ref: containerRef, style: { ...css6.overlay, height }, children: [
+      /* @__PURE__ */ jsx7(
+        "div",
+        {
+          style: {
+            ...css6.grid,
+            height,
+            backgroundImage: `repeating-linear-gradient(
                 to bottom,
                 ${color},
                 ${color} 1px,
                 transparent 1px,
                 transparent ${gap}px
               )`,
-                opacity
-              }
-            }
-          ),
-          /* @__PURE__ */ jsx7(MoveLinesButton, { targetRef: containerRef })
-        ]
-      }
-    ),
+            opacity
+          }
+        }
+      ),
+      /* @__PURE__ */ jsx7(MoveLinesButton, { targetRef: containerRef })
+    ] }),
     /* @__PURE__ */ jsx7(
       ConfigButton,
       {
@@ -608,22 +598,38 @@ function RowGridCore({ show, setShow }) {
 }
 function RowGrid() {
   const [show, setShow] = useState(false);
-  return /* @__PURE__ */ jsxs3(Fragment, { children: [
-    /* @__PURE__ */ jsxs3(
-      Button,
-      {
-        size: "sm",
-        variant: "ghost",
-        style: { ...css6.triggerButton, visibility: show ? "hidden" : "visible" },
-        onClick: () => setShow((v) => !v),
-        children: [
-          "Mostrar linhas",
-          /* @__PURE__ */ jsx7(Icon, { Icon: Eye })
-        ]
-      }
-    ),
-    /* @__PURE__ */ jsx7(RowGridCore, { setShow, show })
-  ] });
+  return /* @__PURE__ */ jsxs3(
+    "div",
+    {
+      style: {
+        position: "fixed",
+        zIndex: 9e3,
+        bottom: 0,
+        left: 0,
+        width: "100%",
+        height: "100dvh"
+      },
+      children: [
+        /* @__PURE__ */ jsx7(RowGridCore, { setShow, show }),
+        /* @__PURE__ */ jsxs3(
+          Button,
+          {
+            size: "sm",
+            variant: "ghost",
+            style: {
+              ...css6.triggerButton,
+              visibility: show ? "hidden" : "visible"
+            },
+            onClick: () => setShow((v) => !v),
+            children: [
+              "Mostrar linhas",
+              /* @__PURE__ */ jsx7(Icon, { Icon: Eye })
+            ]
+          }
+        )
+      ]
+    }
+  );
 }
 export {
   RowGrid

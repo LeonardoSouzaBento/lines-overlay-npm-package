@@ -11,7 +11,6 @@ const css = {
     pointerEvents: 'auto',
   },
   button: {
-    borderRadius: 9999,
     backgroundColor: 'rgba(255,255,255,0.75)',
     backdropFilter: 'blur(2px)',
   },

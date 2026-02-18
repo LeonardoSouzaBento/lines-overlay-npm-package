@@ -95,7 +95,6 @@ var styles = {
     backgroundColor: "rgba(59,130,246,0.08)"
   },
   closeButton: {
-    borderRadius: 9999,
     color: "#0f172a"
   }
 };
@@ -263,7 +262,6 @@ var css3 = {
     pointerEvents: "auto"
   },
   button: {
-    borderRadius: 9999,
     backgroundColor: "rgba(255,255,255,0.75)",
     backdropFilter: "blur(2px)"
   }
@@ -487,8 +485,7 @@ var css5 = {
   colorDot: {
     display: "block",
     width: "80%",
-    height: "80%",
-    borderRadius: 9999
+    height: "80%"
   }
 };
 function ConfigOptions(props) {
@@ -552,25 +549,25 @@ function ConfigOptions(props) {
 var import_jsx_runtime7 = require("react/jsx-runtime");
 var css6 = {
   overlay: {
-    position: "fixed",
+    position: "absolute",
     top: 100,
     left: 0,
     width: "100%",
     pointerEvents: "none",
     display: "flex",
     justifyContent: "center",
-    zIndex: 9998
+    zIndex: 10
   },
   grid: {
     width: "100%"
   },
   triggerButton: {
-    position: "fixed",
+    position: "absolute",
     bottom: 8,
     right: 8,
-    zIndex: 9999,
-    fontSize: "0.75rem",
-    backgroundColor: "rgba(255,255,255,0.66)"
+    zIndex: 20,
+    fontSize: "1rem",
+    backgroundColor: "rgba(255,255,255,0.70)"
   }
 };
 function RowGridCore({ show, setShow }) {
@@ -591,34 +588,27 @@ function RowGridCore({ show, setShow }) {
   }, []);
   if (!show) return null;
   const height = lines * gap;
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
-      "div",
-      {
-        ref: containerRef,
-        style: { ...css6.overlay, height },
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-            "div",
-            {
-              style: {
-                ...css6.grid,
-                height,
-                backgroundImage: `repeating-linear-gradient(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(import_jsx_runtime7.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { ref: containerRef, style: { ...css6.overlay, height }, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+        "div",
+        {
+          style: {
+            ...css6.grid,
+            height,
+            backgroundImage: `repeating-linear-gradient(
                 to bottom,
                 ${color},
                 ${color} 1px,
                 transparent 1px,
                 transparent ${gap}px
               )`,
-                opacity
-              }
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(MoveLinesButton, { targetRef: containerRef })
-        ]
-      }
-    ),
+            opacity
+          }
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(MoveLinesButton, { targetRef: containerRef })
+    ] }),
     /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
       ConfigButton,
       {
@@ -644,22 +634,38 @@ function RowGridCore({ show, setShow }) {
 }
 function RowGrid() {
   const [show, setShow] = (0, import_react2.useState)(false);
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(import_jsx_runtime7.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
-      Button,
-      {
-        size: "sm",
-        variant: "ghost",
-        style: { ...css6.triggerButton, visibility: show ? "hidden" : "visible" },
-        onClick: () => setShow((v) => !v),
-        children: [
-          "Mostrar linhas",
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Icon, { Icon: import_lucide_react3.Eye })
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(RowGridCore, { setShow, show })
-  ] });
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+    "div",
+    {
+      style: {
+        position: "fixed",
+        zIndex: 9e3,
+        bottom: 0,
+        left: 0,
+        width: "100%",
+        height: "100dvh"
+      },
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(RowGridCore, { setShow, show }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+          Button,
+          {
+            size: "sm",
+            variant: "ghost",
+            style: {
+              ...css6.triggerButton,
+              visibility: show ? "hidden" : "visible"
+            },
+            onClick: () => setShow((v) => !v),
+            children: [
+              "Mostrar linhas",
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Icon, { Icon: import_lucide_react3.Eye })
+            ]
+          }
+        )
+      ]
+    }
+  );
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
