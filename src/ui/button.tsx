@@ -10,7 +10,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    borderRadius: 6,
+    borderRadius: 4,
     position: 'relative',
     outline: 'none',
     userSelect: 'none',

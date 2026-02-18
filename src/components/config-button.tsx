@@ -11,9 +11,7 @@ const css = {
     zIndex: 9999,
     pointerEvents: 'auto',
     height: 40,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'rgba(148,163,184,0.8)',
+    border: '1px solid rgba(148,163,184,0.8)',
     backgroundColor: 'rgba(255,255,255,0.70)',
     boxShadow: '0 1px 3px rgba(15,23,42,0.2)',
     display: 'flex',
@@ -23,7 +21,7 @@ const css = {
   },
   label: {
     fontWeight: 500,
-    fontSize: '0.8125rem',
+    fontSize: '1.21875rem',
     letterSpacing: '0.03em',
     paddingRight: 8,
   },
@@ -81,7 +79,7 @@ export function ConfigButton({
             </Button>
           ) : (
             <Separator orientation="vertical" />
-          ),
+          )
         )}
       </div>
     </div>
