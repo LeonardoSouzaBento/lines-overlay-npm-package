@@ -4,27 +4,40 @@ import { Button, Icon } from '../ui';
 
 const css = {
   wrapper: {
-    position: 'absolute' as const,
-    left: '50%',
-    top: '44%',
-    transform: 'translate(-50%, -50%)',
-    pointerEvents: 'auto',
+    width: "100%",
+    height: "100%",
+    position: "absolute" as const,
+    left: 0,
+    top: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    pointerEvents: "auto",
   },
   button: {
-    backgroundColor: 'rgba(255,255,255,0.75)',
-    backdropFilter: 'blur(2px)',
+    backgroundColor: "rgba(255,255,255,0.75)",
+    backdropFilter: "blur(2px)",
+    borderRadius: 9999,
   },
 } as const;
 
-export function MoveLinesButton({ targetRef }: { targetRef: RefObject<HTMLDivElement | null> }) {
+export function MoveLinesButton({
+  targetRef,
+  color,
+  opacity,
+}: {
+  targetRef: RefObject<HTMLDivElement | null>;
+  color: string;
+  opacity: number;
+}) {
   const dragging = useRef(false);
   const last = useRef({ x: 0, y: 0 });
 
   function onMouseDown(e: ReactMouseEvent<HTMLButtonElement>) {
     dragging.current = true;
     last.current = { x: e.clientX, y: e.clientY };
-    document.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseup', onUp);
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
   }
 
   function onMove(e: MouseEvent) {
@@ -43,8 +56,8 @@ export function MoveLinesButton({ targetRef }: { targetRef: RefObject<HTMLDivEle
 
   function onUp() {
     dragging.current = false;
-    document.removeEventListener('mousemove', onMove);
-    document.removeEventListener('mouseup', onUp);
+    document.removeEventListener("mousemove", onMove);
+    document.removeEventListener("mouseup", onUp);
   }
 
   return (
@@ -54,9 +67,21 @@ export function MoveLinesButton({ targetRef }: { targetRef: RefObject<HTMLDivEle
         data-black
         variant="ghost"
         onMouseDown={onMouseDown}
-        style={css.button}>
-        <Icon Icon={Move} size="lg" strokeWidth="thin" />
+        style={css.button}
+      >
+        <Icon Icon={Move} size="3xl" strokeWidth="2" />
       </Button>
+      <div
+        style={{
+          width: "100%",
+          height: 1.25,
+          position: "absolute",
+          left: 0,
+          bottom: 0,
+          backgroundColor: color,
+          opacity,
+        }}
+      />
     </div>
   );
 }

@@ -16,7 +16,7 @@ type Props = {
 const css = {
   overlay: {
     position: "absolute" as const,
-    top: 100,
+    top: 175,
     left: 0,
     width: "100%",
     pointerEvents: "none" as const,
@@ -32,12 +32,11 @@ const css = {
     bottom: 8,
     right: 8,
     zIndex: 20,
-    fontSize: "1rem",
     backgroundColor: "rgba(255,255,255,0.70)",
   },
 } as const;
 
-function RowGridCore({ show, setShow }: Props) {
+function Core({ show, setShow }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [lines, setLines] = useState(12);
   const [gap, setGap] = useState(24);
@@ -71,7 +70,7 @@ function RowGridCore({ show, setShow }: Props) {
             backgroundImage: `repeating-linear-gradient(
                 to bottom,
                 ${color},
-                ${color} 1px,
+                ${color} 1.25px,
                 transparent 1px,
                 transparent ${gap}px
               )`,
@@ -79,7 +78,11 @@ function RowGridCore({ show, setShow }: Props) {
           }}
         />
         {/* Move */}
-        <MoveLinesButton targetRef={containerRef} />
+        <MoveLinesButton
+          targetRef={containerRef}
+          color={color}
+          opacity={opacity}
+        />
       </div>
       {/* Config */}
       <ConfigButton
@@ -103,7 +106,7 @@ function RowGridCore({ show, setShow }: Props) {
   );
 }
 
-export function RowGrid() {
+export function LinesOverlay() {
   const [show, setShow] = useState(false);
 
   return (
@@ -115,9 +118,10 @@ export function RowGrid() {
         left: 0,
         width: "100%",
         height: "100dvh",
+        fontFamily: "Inter, sans-serif",
       }}
     >
-      <RowGridCore setShow={setShow} show={show} />
+      <Core setShow={setShow} show={show} />
 
       <Button
         size="sm"
@@ -128,8 +132,8 @@ export function RowGrid() {
         }}
         onClick={() => setShow((v) => !v)}
       >
-        Mostrar linhas
-        <Icon Icon={Eye} />
+        <Icon Icon={Eye} size="xl" />
+        Mostrar linhas - <span style={{ color: "#787878ff" }}>Ctrl + ;</span>
       </Button>
     </div>
   );

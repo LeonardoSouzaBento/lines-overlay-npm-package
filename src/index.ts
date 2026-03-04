@@ -1,1 +1,1 @@
-export { RowGrid } from "./lines-overlay";
+export { LinesOverlay } from "./lines-overlay";

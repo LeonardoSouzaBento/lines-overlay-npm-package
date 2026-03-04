@@ -1,37 +1,35 @@
 import { Button } from '../ui';
-import { ConfigOptionsProps, NUMBER_FIELDS, colorOptions } from './data';
+import { type ConfigOptionsProps, NUMBER_FIELDS, colorOptions } from "./data";
 
 const css = {
   container: {
-    position: 'fixed',
+    position: "fixed",
     bottom: 52,
     right: 8,
     zIndex: 1000,
-    pointerEvents: 'auto',
-    fontSize: '1.3125rem',
-    backgroundColor: 'rgba(255,255,255,0.94)',
-    backdropFilter: 'blur(4px)',
-    boxShadow: '0 4px 6px rgba(15,23,42,0.12)',
-    border: "1px solid rgba(148,163,184,0.5)",
-    borderRadius: 12,
+    pointerEvents: "auto",
+    backgroundColor: "rgba(255,255,255,0.94)",
+    backdropFilter: "blur(4px)",
+    boxShadow: "0 4px 6px rgba(15,23,42,0.12)",
+    border: "1px solid rgba(148,163,184,0.3)",
+    borderRadius: 8,
     paddingInline: 12,
-    paddingBlock: 8,
-    width: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 8,
-  },
-  fieldRow: {
-    width: '100%',
-    borderBottom: "1px solid rgba(148,163,184,0.4)",
-    paddingBottom: 12,
-    display: 'flex',
-    flexDirection: 'column',
+    paddingBlock: 10,
+    width: "auto",
+    display: "flex",
+    flexDirection: "column",
     gap: 4,
   },
+  fieldRow: {
+    width: "100%",
+    marginBottom: 12,
+    display: "flex",
+    flexDirection: "column",
+    gap: 8,
+  },
   wrapper: {
-    display: 'flex',
-    alignItems: 'flex-end',
+    display: "flex",
+    alignItems: "flex-end",
     gap: 8,
     borderRadius: 4,
   },
@@ -39,45 +37,46 @@ const css = {
     width: 104,
   },
   label: {
-    display: 'block',
-    fontSize: '1.125rem',
+    display: "block",
     fontWeight: 500,
     marginBottom: 4,
+    fontSize: 14,
   },
   numberInput: {
-    width: '100%',
+    width: "100%",
     height: 32,
     borderRadius: 4,
-    border: '1px solid #e5e7eb',
+    border: "1px solid #e5e7eb",
     paddingInline: 8,
-    fontSize: '0.875rem',
+    boxSizing: "border-box",
   },
   quickRow: {
-    display: 'flex',
-    gap: 5,
+    display: "flex",
+    gap: 6,
     marginTop: 4,
   },
   quickButton: {
     fontWeight: 500,
-    fontSize: '0.875rem',
+    borderRadius: 999,
   },
   colorSection: {
-    marginTop: 8,
+    marginTop: 0,
   },
   colorLabel: {
-    display: 'block',
-    fontSize: '1.125rem',
+    display: "block",
     fontWeight: 500,
     marginBottom: 4,
+    fontSize: 14,
   },
   colorRow: {
-    display: 'flex',
+    display: "flex",
     gap: 8,
   },
   colorDot: {
-    display: 'block',
-    width: '80%',
-    height: '80%',
+    display: "block",
+    width: "80%",
+    height: "80%",
+    borderRadius: 999,
   },
 } as const;
 
@@ -116,7 +115,8 @@ export function ConfigOptions(props: ConfigOptionsProps) {
                       variant="ghost"
                       size="icon-sm"
                       style={css.quickButton}
-                      onClick={() => binding.set(v)}>
+                      onClick={() => binding.set(v)}
+                    >
                       {v}
                     </Button>
                   );
@@ -132,11 +132,13 @@ export function ConfigOptions(props: ConfigOptionsProps) {
         <div style={css.colorRow}>
           {colorOptions.map((c) => (
             <Button
+              style={{ borderRadius: 999 }}
               key={c.value}
               variant="ghost"
               size="icon-sm"
               title={c.name}
-              onClick={() => props.setColor(c.value)}>
+              onClick={() => props.setColor(c.value)}
+            >
               <span style={{ ...css.colorDot, backgroundColor: c.value }} />
             </Button>
           ))}
