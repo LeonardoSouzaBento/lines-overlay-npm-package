@@ -493,7 +493,7 @@ var css5 = {
     borderRadius: 999
   },
   colorSection: {
-    marginTop: 0
+    marginBottom: 12
   },
   colorLabel: {
     display: "block",
