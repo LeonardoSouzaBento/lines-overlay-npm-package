@@ -76,15 +76,12 @@ function Core({ show, setShow }: Props) {
                 transparent ${gap}px
               )`,
             opacity,
+            borderBottom: `1.5px solid ${color}`,
             transform: `rotate(${rotate}deg)`,
           }}
         />
         {/* Move */}
-        <MoveLinesButton
-          targetRef={containerRef}
-          color={color}
-          opacity={opacity}
-        />
+        <MoveLinesButton targetRef={containerRef} />
       </div>
       {/* Config */}
       <ConfigButton

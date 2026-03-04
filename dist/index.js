@@ -272,9 +272,7 @@ var css3 = {
   }
 };
 function MoveLinesButton({
-  targetRef,
-  color,
-  opacity
+  targetRef
 }) {
   const dragging = (0, import_react.useRef)(false);
   const last = (0, import_react.useRef)({ x: 0, y: 0 });
@@ -298,33 +296,17 @@ function MoveLinesButton({
     document.removeEventListener("mousemove", onMove);
     document.removeEventListener("mouseup", onUp);
   }
-  return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: css3.wrapper, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-      Button,
-      {
-        size: "icon-sm",
-        "data-black": true,
-        variant: "ghost",
-        onMouseDown,
-        style: css3.button,
-        children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Icon, { Icon: import_lucide_react.Move, size: "3xl", strokeWidth: "2" })
-      }
-    ),
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-      "div",
-      {
-        style: {
-          width: "100%",
-          height: 1.25,
-          position: "absolute",
-          left: 0,
-          bottom: 0,
-          backgroundColor: color,
-          opacity
-        }
-      }
-    )
-  ] });
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: css3.wrapper, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+    Button,
+    {
+      size: "icon-sm",
+      "data-black": true,
+      variant: "ghost",
+      onMouseDown,
+      style: css3.button,
+      children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Icon, { Icon: import_lucide_react.Move, size: "3xl", strokeWidth: "2" })
+    }
+  ) });
 }
 
 // src/components/config-button.tsx
@@ -666,18 +648,12 @@ function Core({ show, setShow }) {
                 transparent ${gap}px
               )`,
             opacity,
+            borderBottom: `1.5px solid ${color}`,
             transform: `rotate(${rotate}deg)`
           }
         }
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-        MoveLinesButton,
-        {
-          targetRef: containerRef,
-          color,
-          opacity
-        }
-      )
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(MoveLinesButton, { targetRef: containerRef })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
       ConfigButton,

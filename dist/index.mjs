@@ -216,7 +216,7 @@ var Separator = React2.forwardRef(
 Separator.displayName = "Separator";
 
 // src/components/move-lines-button.tsx
-import { jsx as jsx4, jsxs } from "react/jsx-runtime";
+import { jsx as jsx4 } from "react/jsx-runtime";
 var css3 = {
   wrapper: {
     width: "100%",
@@ -236,9 +236,7 @@ var css3 = {
   }
 };
 function MoveLinesButton({
-  targetRef,
-  color,
-  opacity
+  targetRef
 }) {
   const dragging = useRef(false);
   const last = useRef({ x: 0, y: 0 });
@@ -262,38 +260,22 @@ function MoveLinesButton({
     document.removeEventListener("mousemove", onMove);
     document.removeEventListener("mouseup", onUp);
   }
-  return /* @__PURE__ */ jsxs("div", { style: css3.wrapper, children: [
-    /* @__PURE__ */ jsx4(
-      Button,
-      {
-        size: "icon-sm",
-        "data-black": true,
-        variant: "ghost",
-        onMouseDown,
-        style: css3.button,
-        children: /* @__PURE__ */ jsx4(Icon, { Icon: Move, size: "3xl", strokeWidth: "2" })
-      }
-    ),
-    /* @__PURE__ */ jsx4(
-      "div",
-      {
-        style: {
-          width: "100%",
-          height: 1.25,
-          position: "absolute",
-          left: 0,
-          bottom: 0,
-          backgroundColor: color,
-          opacity
-        }
-      }
-    )
-  ] });
+  return /* @__PURE__ */ jsx4("div", { style: css3.wrapper, children: /* @__PURE__ */ jsx4(
+    Button,
+    {
+      size: "icon-sm",
+      "data-black": true,
+      variant: "ghost",
+      onMouseDown,
+      style: css3.button,
+      children: /* @__PURE__ */ jsx4(Icon, { Icon: Move, size: "3xl", strokeWidth: "2" })
+    }
+  ) });
 }
 
 // src/components/config-button.tsx
 import { ChevronDown, ChevronUp, X } from "lucide-react";
-import { jsx as jsx5, jsxs as jsxs2 } from "react/jsx-runtime";
+import { jsx as jsx5, jsxs } from "react/jsx-runtime";
 var css4 = {
   container: {
     position: "fixed",
@@ -341,7 +323,7 @@ function ConfigButton({
       setShow((v) => !v);
     }
   };
-  return /* @__PURE__ */ jsxs2("div", { style: css4.container, children: [
+  return /* @__PURE__ */ jsxs("div", { style: css4.container, children: [
     /* @__PURE__ */ jsx5(
       "span",
       {
@@ -415,7 +397,7 @@ var colorOptions = [
 ];
 
 // src/components/config-options.tsx
-import { jsx as jsx6, jsxs as jsxs3 } from "react/jsx-runtime";
+import { jsx as jsx6, jsxs as jsxs2 } from "react/jsx-runtime";
 var css5 = {
   container: {
     position: "fixed",
@@ -500,11 +482,11 @@ function ConfigOptions(props) {
     gap: { value: props.gap, set: props.setGap },
     opacity: { value: props.opacity, set: props.setOpacity }
   };
-  return /* @__PURE__ */ jsxs3("div", { style: css5.container, children: [
+  return /* @__PURE__ */ jsxs2("div", { style: css5.container, children: [
     NUMBER_FIELDS.map((field) => {
       const binding = fieldBindings[field.key];
-      return /* @__PURE__ */ jsx6("div", { style: css5.fieldRow, children: /* @__PURE__ */ jsxs3("div", { style: css5.wrapper, children: [
-        /* @__PURE__ */ jsxs3("div", { style: css5.inputWrapper, children: [
+      return /* @__PURE__ */ jsx6("div", { style: css5.fieldRow, children: /* @__PURE__ */ jsxs2("div", { style: css5.wrapper, children: [
+        /* @__PURE__ */ jsxs2("div", { style: css5.inputWrapper, children: [
           /* @__PURE__ */ jsx6("label", { style: css5.label, children: field.label }),
           /* @__PURE__ */ jsx6(
             "input",
@@ -534,7 +516,7 @@ function ConfigOptions(props) {
         }) })
       ] }) }, field.key);
     }),
-    /* @__PURE__ */ jsxs3("div", { style: css5.colorSection, children: [
+    /* @__PURE__ */ jsxs2("div", { style: css5.colorSection, children: [
       /* @__PURE__ */ jsx6("span", { style: css5.colorLabel, children: "Cor" }),
       /* @__PURE__ */ jsx6("div", { style: css5.colorRow, children: colorOptions.map((c) => /* @__PURE__ */ jsx6(
         Button,
@@ -549,7 +531,7 @@ function ConfigOptions(props) {
         c.value
       )) })
     ] }),
-    /* @__PURE__ */ jsxs3(
+    /* @__PURE__ */ jsxs2(
       Button,
       {
         variant: "ghost",
@@ -572,7 +554,7 @@ function ConfigOptions(props) {
 }
 
 // src/lines-overlay.tsx
-import { Fragment, jsx as jsx7, jsxs as jsxs4 } from "react/jsx-runtime";
+import { Fragment, jsx as jsx7, jsxs as jsxs3 } from "react/jsx-runtime";
 var css6 = {
   overlay: {
     position: "absolute",
@@ -614,8 +596,8 @@ function Core({ show, setShow }) {
   }, []);
   if (!show) return null;
   const height = lines * gap;
-  return /* @__PURE__ */ jsxs4(Fragment, { children: [
-    /* @__PURE__ */ jsxs4("div", { ref: containerRef, style: { ...css6.overlay, height }, children: [
+  return /* @__PURE__ */ jsxs3(Fragment, { children: [
+    /* @__PURE__ */ jsxs3("div", { ref: containerRef, style: { ...css6.overlay, height }, children: [
       /* @__PURE__ */ jsx7(
         "div",
         {
@@ -630,18 +612,12 @@ function Core({ show, setShow }) {
                 transparent ${gap}px
               )`,
             opacity,
+            borderBottom: `1.5px solid ${color}`,
             transform: `rotate(${rotate}deg)`
           }
         }
       ),
-      /* @__PURE__ */ jsx7(
-        MoveLinesButton,
-        {
-          targetRef: containerRef,
-          color,
-          opacity
-        }
-      )
+      /* @__PURE__ */ jsx7(MoveLinesButton, { targetRef: containerRef })
     ] }),
     /* @__PURE__ */ jsx7(
       ConfigButton,
@@ -670,7 +646,7 @@ function Core({ show, setShow }) {
 }
 function LinesOverlay() {
   const [show, setShow] = useState(false);
-  return /* @__PURE__ */ jsxs4(
+  return /* @__PURE__ */ jsxs3(
     "div",
     {
       style: {
@@ -684,7 +660,7 @@ function LinesOverlay() {
       },
       children: [
         /* @__PURE__ */ jsx7(Core, { setShow, show }),
-        /* @__PURE__ */ jsxs4(
+        /* @__PURE__ */ jsxs3(
           Button,
           {
             size: "sm",

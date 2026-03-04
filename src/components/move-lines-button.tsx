@@ -23,12 +23,8 @@ const css = {
 
 export function MoveLinesButton({
   targetRef,
-  color,
-  opacity,
 }: {
   targetRef: RefObject<HTMLDivElement | null>;
-  color: string;
-  opacity: number;
 }) {
   const dragging = useRef(false);
   const last = useRef({ x: 0, y: 0 });
@@ -71,17 +67,6 @@ export function MoveLinesButton({
       >
         <Icon Icon={Move} size="3xl" strokeWidth="2" />
       </Button>
-      <div
-        style={{
-          width: "100%",
-          height: 1.25,
-          position: "absolute",
-          left: 0,
-          bottom: 0,
-          backgroundColor: color,
-          opacity,
-        }}
-      />
     </div>
   );
 }
