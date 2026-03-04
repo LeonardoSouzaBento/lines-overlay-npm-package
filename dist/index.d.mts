@@ -1,5 +1,5 @@
 import * as react_jsx_runtime from 'react/jsx-runtime';
 
-declare function RowGrid(): react_jsx_runtime.JSX.Element;
+declare function LinesOverlay(): react_jsx_runtime.JSX.Element;
 
-export { RowGrid };
+export { LinesOverlay };

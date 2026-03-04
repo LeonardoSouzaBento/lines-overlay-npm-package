@@ -216,21 +216,30 @@ var Separator = React2.forwardRef(
 Separator.displayName = "Separator";
 
 // src/components/move-lines-button.tsx
-import { jsx as jsx4 } from "react/jsx-runtime";
+import { jsx as jsx4, jsxs } from "react/jsx-runtime";
 var css3 = {
   wrapper: {
+    width: "100%",
+    height: "100%",
     position: "absolute",
-    left: "50%",
-    top: "44%",
-    transform: "translate(-50%, -50%)",
+    left: 0,
+    top: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     pointerEvents: "auto"
   },
   button: {
     backgroundColor: "rgba(255,255,255,0.75)",
-    backdropFilter: "blur(2px)"
+    backdropFilter: "blur(2px)",
+    borderRadius: 9999
   }
 };
-function MoveLinesButton({ targetRef }) {
+function MoveLinesButton({
+  targetRef,
+  color,
+  opacity
+}) {
   const dragging = useRef(false);
   const last = useRef({ x: 0, y: 0 });
   function onMouseDown(e) {
@@ -253,22 +262,38 @@ function MoveLinesButton({ targetRef }) {
     document.removeEventListener("mousemove", onMove);
     document.removeEventListener("mouseup", onUp);
   }
-  return /* @__PURE__ */ jsx4("div", { style: css3.wrapper, children: /* @__PURE__ */ jsx4(
-    Button,
-    {
-      size: "icon-sm",
-      "data-black": true,
-      variant: "ghost",
-      onMouseDown,
-      style: css3.button,
-      children: /* @__PURE__ */ jsx4(Icon, { Icon: Move, size: "lg", strokeWidth: "thin" })
-    }
-  ) });
+  return /* @__PURE__ */ jsxs("div", { style: css3.wrapper, children: [
+    /* @__PURE__ */ jsx4(
+      Button,
+      {
+        size: "icon-sm",
+        "data-black": true,
+        variant: "ghost",
+        onMouseDown,
+        style: css3.button,
+        children: /* @__PURE__ */ jsx4(Icon, { Icon: Move, size: "3xl", strokeWidth: "2" })
+      }
+    ),
+    /* @__PURE__ */ jsx4(
+      "div",
+      {
+        style: {
+          width: "100%",
+          height: 1.25,
+          position: "absolute",
+          left: 0,
+          bottom: 0,
+          backgroundColor: color,
+          opacity
+        }
+      }
+    )
+  ] });
 }
 
 // src/components/config-button.tsx
 import { ChevronDown, ChevronUp, X } from "lucide-react";
-import { jsx as jsx5, jsxs } from "react/jsx-runtime";
+import { jsx as jsx5, jsxs as jsxs2 } from "react/jsx-runtime";
 var css4 = {
   container: {
     position: "fixed",
@@ -277,19 +302,21 @@ var css4 = {
     zIndex: 9999,
     pointerEvents: "auto",
     height: 40,
-    border: "1px solid rgba(148,163,184,0.8)",
+    border: "1px solid rgba(148,163,184,0.5)",
     backgroundColor: "rgba(255,255,255,0.70)",
     boxShadow: "0 1px 3px rgba(15,23,42,0.2)",
     display: "flex",
     alignItems: "center",
     paddingLeft: 14,
-    paddingRight: 4
+    paddingRight: 4,
+    borderRadius: 4
   },
   label: {
-    fontWeight: 500,
-    fontSize: "1.21875rem",
+    fontWeight: 600,
     letterSpacing: "0.03em",
-    paddingRight: 8
+    paddingRight: 8,
+    fontSize: 14,
+    userSelect: "none"
   },
   buttonsRow: {
     height: "100%",
@@ -314,19 +341,39 @@ function ConfigButton({
       setShow((v) => !v);
     }
   };
-  return /* @__PURE__ */ jsxs("div", { style: css4.container, children: [
-    /* @__PURE__ */ jsx5("span", { style: css4.label, children: "Configurar" }),
+  return /* @__PURE__ */ jsxs2("div", { style: css4.container, children: [
+    /* @__PURE__ */ jsx5(
+      "span",
+      {
+        style: css4.label,
+        onClick: (e) => {
+          e.stopPropagation();
+          onToggleConfig();
+        },
+        children: "Configurar"
+      }
+    ),
     /* @__PURE__ */ jsx5("div", { style: css4.buttonsRow, children: [1, 2, 3].map(
       (item) => item !== 2 ? /* @__PURE__ */ jsx5(
         Button,
         {
+          style: {
+            outlineWidth: 1
+          },
           variant: "transparent",
           size: "icon-sm",
           "data-black": true,
           onClick: (e) => {
             handleClick(e, item);
           },
-          children: item === 1 ? /* @__PURE__ */ jsx5(Icon, { Icon: open ? ChevronDown : ChevronUp, size: "xl", strokeWidth: "light" }) : /* @__PURE__ */ jsx5(Icon, { Icon: X, size: "sm", strokeWidth: "light", className: void 0 })
+          children: item === 1 ? /* @__PURE__ */ jsx5(
+            Icon,
+            {
+              Icon: open ? ChevronDown : ChevronUp,
+              size: "xl",
+              strokeWidth: "light"
+            }
+          ) : /* @__PURE__ */ jsx5(Icon, { Icon: X, size: "sm", strokeWidth: "light" })
         },
         item
       ) : /* @__PURE__ */ jsx5(Separator, { orientation: "vertical" })
@@ -365,7 +412,7 @@ var colorOptions = [
 ];
 
 // src/components/config-options.tsx
-import { jsx as jsx6, jsxs as jsxs2 } from "react/jsx-runtime";
+import { jsx as jsx6, jsxs as jsxs3 } from "react/jsx-runtime";
 var css5 = {
   container: {
     position: "fixed",
@@ -373,26 +420,24 @@ var css5 = {
     right: 8,
     zIndex: 1e3,
     pointerEvents: "auto",
-    fontSize: "1.3125rem",
     backgroundColor: "rgba(255,255,255,0.94)",
     backdropFilter: "blur(4px)",
     boxShadow: "0 4px 6px rgba(15,23,42,0.12)",
-    border: "1px solid rgba(148,163,184,0.5)",
-    borderRadius: 12,
+    border: "1px solid rgba(148,163,184,0.3)",
+    borderRadius: 8,
     paddingInline: 12,
-    paddingBlock: 8,
+    paddingBlock: 10,
     width: "auto",
     display: "flex",
     flexDirection: "column",
-    gap: 8
+    gap: 4
   },
   fieldRow: {
     width: "100%",
-    borderBottom: "1px solid rgba(148,163,184,0.4)",
-    paddingBottom: 12,
+    marginBottom: 12,
     display: "flex",
     flexDirection: "column",
-    gap: 4
+    gap: 8
   },
   wrapper: {
     display: "flex",
@@ -405,9 +450,9 @@ var css5 = {
   },
   label: {
     display: "block",
-    fontSize: "1.125rem",
     fontWeight: 500,
-    marginBottom: 4
+    marginBottom: 4,
+    fontSize: 14
   },
   numberInput: {
     width: "100%",
@@ -415,25 +460,25 @@ var css5 = {
     borderRadius: 4,
     border: "1px solid #e5e7eb",
     paddingInline: 8,
-    fontSize: "0.875rem"
+    boxSizing: "border-box"
   },
   quickRow: {
     display: "flex",
-    gap: 5,
+    gap: 6,
     marginTop: 4
   },
   quickButton: {
     fontWeight: 500,
-    fontSize: "0.875rem"
+    borderRadius: 999
   },
   colorSection: {
-    marginTop: 8
+    marginTop: 0
   },
   colorLabel: {
     display: "block",
-    fontSize: "1.125rem",
     fontWeight: 500,
-    marginBottom: 4
+    marginBottom: 4,
+    fontSize: 14
   },
   colorRow: {
     display: "flex",
@@ -442,7 +487,8 @@ var css5 = {
   colorDot: {
     display: "block",
     width: "80%",
-    height: "80%"
+    height: "80%",
+    borderRadius: 999
   }
 };
 function ConfigOptions(props) {
@@ -451,11 +497,11 @@ function ConfigOptions(props) {
     gap: { value: props.gap, set: props.setGap },
     opacity: { value: props.opacity, set: props.setOpacity }
   };
-  return /* @__PURE__ */ jsxs2("div", { style: css5.container, children: [
+  return /* @__PURE__ */ jsxs3("div", { style: css5.container, children: [
     NUMBER_FIELDS.map((field) => {
       const binding = fieldBindings[field.key];
-      return /* @__PURE__ */ jsx6("div", { style: css5.fieldRow, children: /* @__PURE__ */ jsxs2("div", { style: css5.wrapper, children: [
-        /* @__PURE__ */ jsxs2("div", { style: css5.inputWrapper, children: [
+      return /* @__PURE__ */ jsx6("div", { style: css5.fieldRow, children: /* @__PURE__ */ jsxs3("div", { style: css5.wrapper, children: [
+        /* @__PURE__ */ jsxs3("div", { style: css5.inputWrapper, children: [
           /* @__PURE__ */ jsx6("label", { style: css5.label, children: field.label }),
           /* @__PURE__ */ jsx6(
             "input",
@@ -485,11 +531,12 @@ function ConfigOptions(props) {
         }) })
       ] }) }, field.key);
     }),
-    /* @__PURE__ */ jsxs2("div", { style: css5.colorSection, children: [
+    /* @__PURE__ */ jsxs3("div", { style: css5.colorSection, children: [
       /* @__PURE__ */ jsx6("span", { style: css5.colorLabel, children: "Cor" }),
       /* @__PURE__ */ jsx6("div", { style: css5.colorRow, children: colorOptions.map((c) => /* @__PURE__ */ jsx6(
         Button,
         {
+          style: { borderRadius: 999 },
           variant: "ghost",
           size: "icon-sm",
           title: c.name,
@@ -503,11 +550,11 @@ function ConfigOptions(props) {
 }
 
 // src/lines-overlay.tsx
-import { Fragment, jsx as jsx7, jsxs as jsxs3 } from "react/jsx-runtime";
+import { Fragment, jsx as jsx7, jsxs as jsxs4 } from "react/jsx-runtime";
 var css6 = {
   overlay: {
     position: "absolute",
-    top: 100,
+    top: 175,
     left: 0,
     width: "100%",
     pointerEvents: "none",
@@ -523,11 +570,10 @@ var css6 = {
     bottom: 8,
     right: 8,
     zIndex: 20,
-    fontSize: "1rem",
     backgroundColor: "rgba(255,255,255,0.70)"
   }
 };
-function RowGridCore({ show, setShow }) {
+function Core({ show, setShow }) {
   const containerRef = useRef2(null);
   const [lines, setLines] = useState(12);
   const [gap, setGap] = useState(24);
@@ -545,8 +591,8 @@ function RowGridCore({ show, setShow }) {
   }, []);
   if (!show) return null;
   const height = lines * gap;
-  return /* @__PURE__ */ jsxs3(Fragment, { children: [
-    /* @__PURE__ */ jsxs3("div", { ref: containerRef, style: { ...css6.overlay, height }, children: [
+  return /* @__PURE__ */ jsxs4(Fragment, { children: [
+    /* @__PURE__ */ jsxs4("div", { ref: containerRef, style: { ...css6.overlay, height }, children: [
       /* @__PURE__ */ jsx7(
         "div",
         {
@@ -556,7 +602,7 @@ function RowGridCore({ show, setShow }) {
             backgroundImage: `repeating-linear-gradient(
                 to bottom,
                 ${color},
-                ${color} 1px,
+                ${color} 1.25px,
                 transparent 1px,
                 transparent ${gap}px
               )`,
@@ -564,7 +610,14 @@ function RowGridCore({ show, setShow }) {
           }
         }
       ),
-      /* @__PURE__ */ jsx7(MoveLinesButton, { targetRef: containerRef })
+      /* @__PURE__ */ jsx7(
+        MoveLinesButton,
+        {
+          targetRef: containerRef,
+          color,
+          opacity
+        }
+      )
     ] }),
     /* @__PURE__ */ jsx7(
       ConfigButton,
@@ -589,9 +642,9 @@ function RowGridCore({ show, setShow }) {
     )
   ] });
 }
-function RowGrid() {
+function LinesOverlay() {
   const [show, setShow] = useState(false);
-  return /* @__PURE__ */ jsxs3(
+  return /* @__PURE__ */ jsxs4(
     "div",
     {
       style: {
@@ -600,11 +653,12 @@ function RowGrid() {
         bottom: 0,
         left: 0,
         width: "100%",
-        height: "100dvh"
+        height: "100dvh",
+        fontFamily: "Inter, sans-serif"
       },
       children: [
-        /* @__PURE__ */ jsx7(RowGridCore, { setShow, show }),
-        /* @__PURE__ */ jsxs3(
+        /* @__PURE__ */ jsx7(Core, { setShow, show }),
+        /* @__PURE__ */ jsxs4(
           Button,
           {
             size: "sm",
@@ -615,8 +669,9 @@ function RowGrid() {
             },
             onClick: () => setShow((v) => !v),
             children: [
-              "Mostrar linhas",
-              /* @__PURE__ */ jsx7(Icon, { Icon: Eye })
+              /* @__PURE__ */ jsx7(Icon, { Icon: Eye, size: "xl" }),
+              "Mostrar linhas - ",
+              /* @__PURE__ */ jsx7("span", { style: { color: "#787878ff" }, children: "Ctrl + ;" })
             ]
           }
         )
@@ -625,6 +680,6 @@ function RowGrid() {
   );
 }
 export {
-  RowGrid
+  LinesOverlay
 };
 //# sourceMappingURL=index.mjs.map

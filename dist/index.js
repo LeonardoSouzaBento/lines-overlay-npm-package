@@ -30,7 +30,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var index_exports = {};
 __export(index_exports, {
-  RowGrid: () => RowGrid
+  LinesOverlay: () => LinesOverlay
 });
 module.exports = __toCommonJS(index_exports);
 
@@ -255,18 +255,27 @@ Separator.displayName = "Separator";
 var import_jsx_runtime4 = require("react/jsx-runtime");
 var css3 = {
   wrapper: {
+    width: "100%",
+    height: "100%",
     position: "absolute",
-    left: "50%",
-    top: "44%",
-    transform: "translate(-50%, -50%)",
+    left: 0,
+    top: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     pointerEvents: "auto"
   },
   button: {
     backgroundColor: "rgba(255,255,255,0.75)",
-    backdropFilter: "blur(2px)"
+    backdropFilter: "blur(2px)",
+    borderRadius: 9999
   }
 };
-function MoveLinesButton({ targetRef }) {
+function MoveLinesButton({
+  targetRef,
+  color,
+  opacity
+}) {
   const dragging = (0, import_react.useRef)(false);
   const last = (0, import_react.useRef)({ x: 0, y: 0 });
   function onMouseDown(e) {
@@ -289,17 +298,33 @@ function MoveLinesButton({ targetRef }) {
     document.removeEventListener("mousemove", onMove);
     document.removeEventListener("mouseup", onUp);
   }
-  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: css3.wrapper, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-    Button,
-    {
-      size: "icon-sm",
-      "data-black": true,
-      variant: "ghost",
-      onMouseDown,
-      style: css3.button,
-      children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Icon, { Icon: import_lucide_react.Move, size: "lg", strokeWidth: "thin" })
-    }
-  ) });
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: css3.wrapper, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+      Button,
+      {
+        size: "icon-sm",
+        "data-black": true,
+        variant: "ghost",
+        onMouseDown,
+        style: css3.button,
+        children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Icon, { Icon: import_lucide_react.Move, size: "3xl", strokeWidth: "2" })
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+      "div",
+      {
+        style: {
+          width: "100%",
+          height: 1.25,
+          position: "absolute",
+          left: 0,
+          bottom: 0,
+          backgroundColor: color,
+          opacity
+        }
+      }
+    )
+  ] });
 }
 
 // src/components/config-button.tsx
@@ -313,19 +338,21 @@ var css4 = {
     zIndex: 9999,
     pointerEvents: "auto",
     height: 40,
-    border: "1px solid rgba(148,163,184,0.8)",
+    border: "1px solid rgba(148,163,184,0.5)",
     backgroundColor: "rgba(255,255,255,0.70)",
     boxShadow: "0 1px 3px rgba(15,23,42,0.2)",
     display: "flex",
     alignItems: "center",
     paddingLeft: 14,
-    paddingRight: 4
+    paddingRight: 4,
+    borderRadius: 4
   },
   label: {
-    fontWeight: 500,
-    fontSize: "1.21875rem",
+    fontWeight: 600,
     letterSpacing: "0.03em",
-    paddingRight: 8
+    paddingRight: 8,
+    fontSize: 14,
+    userSelect: "none"
   },
   buttonsRow: {
     height: "100%",
@@ -351,18 +378,38 @@ function ConfigButton({
     }
   };
   return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { style: css4.container, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { style: css4.label, children: "Configurar" }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "span",
+      {
+        style: css4.label,
+        onClick: (e) => {
+          e.stopPropagation();
+          onToggleConfig();
+        },
+        children: "Configurar"
+      }
+    ),
     /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { style: css4.buttonsRow, children: [1, 2, 3].map(
       (item) => item !== 2 ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
         Button,
         {
+          style: {
+            outlineWidth: 1
+          },
           variant: "transparent",
           size: "icon-sm",
           "data-black": true,
           onClick: (e) => {
             handleClick(e, item);
           },
-          children: item === 1 ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { Icon: open ? import_lucide_react2.ChevronDown : import_lucide_react2.ChevronUp, size: "xl", strokeWidth: "light" }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { Icon: import_lucide_react2.X, size: "sm", strokeWidth: "light", className: void 0 })
+          children: item === 1 ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+            Icon,
+            {
+              Icon: open ? import_lucide_react2.ChevronDown : import_lucide_react2.ChevronUp,
+              size: "xl",
+              strokeWidth: "light"
+            }
+          ) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { Icon: import_lucide_react2.X, size: "sm", strokeWidth: "light" })
         },
         item
       ) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Separator, { orientation: "vertical" })
@@ -409,26 +456,24 @@ var css5 = {
     right: 8,
     zIndex: 1e3,
     pointerEvents: "auto",
-    fontSize: "1.3125rem",
     backgroundColor: "rgba(255,255,255,0.94)",
     backdropFilter: "blur(4px)",
     boxShadow: "0 4px 6px rgba(15,23,42,0.12)",
-    border: "1px solid rgba(148,163,184,0.5)",
-    borderRadius: 12,
+    border: "1px solid rgba(148,163,184,0.3)",
+    borderRadius: 8,
     paddingInline: 12,
-    paddingBlock: 8,
+    paddingBlock: 10,
     width: "auto",
     display: "flex",
     flexDirection: "column",
-    gap: 8
+    gap: 4
   },
   fieldRow: {
     width: "100%",
-    borderBottom: "1px solid rgba(148,163,184,0.4)",
-    paddingBottom: 12,
+    marginBottom: 12,
     display: "flex",
     flexDirection: "column",
-    gap: 4
+    gap: 8
   },
   wrapper: {
     display: "flex",
@@ -441,9 +486,9 @@ var css5 = {
   },
   label: {
     display: "block",
-    fontSize: "1.125rem",
     fontWeight: 500,
-    marginBottom: 4
+    marginBottom: 4,
+    fontSize: 14
   },
   numberInput: {
     width: "100%",
@@ -451,25 +496,25 @@ var css5 = {
     borderRadius: 4,
     border: "1px solid #e5e7eb",
     paddingInline: 8,
-    fontSize: "0.875rem"
+    boxSizing: "border-box"
   },
   quickRow: {
     display: "flex",
-    gap: 5,
+    gap: 6,
     marginTop: 4
   },
   quickButton: {
     fontWeight: 500,
-    fontSize: "0.875rem"
+    borderRadius: 999
   },
   colorSection: {
-    marginTop: 8
+    marginTop: 0
   },
   colorLabel: {
     display: "block",
-    fontSize: "1.125rem",
     fontWeight: 500,
-    marginBottom: 4
+    marginBottom: 4,
+    fontSize: 14
   },
   colorRow: {
     display: "flex",
@@ -478,7 +523,8 @@ var css5 = {
   colorDot: {
     display: "block",
     width: "80%",
-    height: "80%"
+    height: "80%",
+    borderRadius: 999
   }
 };
 function ConfigOptions(props) {
@@ -526,6 +572,7 @@ function ConfigOptions(props) {
       /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { style: css5.colorRow, children: colorOptions.map((c) => /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
         Button,
         {
+          style: { borderRadius: 999 },
           variant: "ghost",
           size: "icon-sm",
           title: c.name,
@@ -543,7 +590,7 @@ var import_jsx_runtime7 = require("react/jsx-runtime");
 var css6 = {
   overlay: {
     position: "absolute",
-    top: 100,
+    top: 175,
     left: 0,
     width: "100%",
     pointerEvents: "none",
@@ -559,11 +606,10 @@ var css6 = {
     bottom: 8,
     right: 8,
     zIndex: 20,
-    fontSize: "1rem",
     backgroundColor: "rgba(255,255,255,0.70)"
   }
 };
-function RowGridCore({ show, setShow }) {
+function Core({ show, setShow }) {
   const containerRef = (0, import_react2.useRef)(null);
   const [lines, setLines] = (0, import_react2.useState)(12);
   const [gap, setGap] = (0, import_react2.useState)(24);
@@ -592,7 +638,7 @@ function RowGridCore({ show, setShow }) {
             backgroundImage: `repeating-linear-gradient(
                 to bottom,
                 ${color},
-                ${color} 1px,
+                ${color} 1.25px,
                 transparent 1px,
                 transparent ${gap}px
               )`,
@@ -600,7 +646,14 @@ function RowGridCore({ show, setShow }) {
           }
         }
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(MoveLinesButton, { targetRef: containerRef })
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+        MoveLinesButton,
+        {
+          targetRef: containerRef,
+          color,
+          opacity
+        }
+      )
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
       ConfigButton,
@@ -625,7 +678,7 @@ function RowGridCore({ show, setShow }) {
     )
   ] });
 }
-function RowGrid() {
+function LinesOverlay() {
   const [show, setShow] = (0, import_react2.useState)(false);
   return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
     "div",
@@ -636,10 +689,11 @@ function RowGrid() {
         bottom: 0,
         left: 0,
         width: "100%",
-        height: "100dvh"
+        height: "100dvh",
+        fontFamily: "Inter, sans-serif"
       },
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(RowGridCore, { setShow, show }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Core, { setShow, show }),
         /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
           Button,
           {
@@ -651,8 +705,9 @@ function RowGrid() {
             },
             onClick: () => setShow((v) => !v),
             children: [
-              "Mostrar linhas",
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Icon, { Icon: import_lucide_react3.Eye })
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Icon, { Icon: import_lucide_react3.Eye, size: "xl" }),
+              "Mostrar linhas - ",
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { style: { color: "#787878ff" }, children: "Ctrl + ;" })
             ]
           }
         )
@@ -662,6 +717,6 @@ function RowGrid() {
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  RowGrid
+  LinesOverlay
 });
 //# sourceMappingURL=index.js.map
