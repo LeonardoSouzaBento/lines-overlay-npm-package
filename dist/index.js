@@ -35,7 +35,7 @@ __export(index_exports, {
 module.exports = __toCommonJS(index_exports);
 
 // src/lines-overlay.tsx
-var import_lucide_react3 = require("lucide-react");
+var import_lucide_react4 = require("lucide-react");
 var import_react2 = require("react");
 
 // src/components/move-lines-button.tsx
@@ -417,6 +417,9 @@ function ConfigButton({
   ] });
 }
 
+// src/components/config-options.tsx
+var import_lucide_react3 = require("lucide-react");
+
 // src/components/data.ts
 var NUMBER_FIELDS = [
   {
@@ -581,7 +584,26 @@ function ConfigOptions(props) {
         },
         c.value
       )) })
-    ] })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+      Button,
+      {
+        variant: "ghost",
+        size: "sm",
+        style: { maxWidth: "max-content" },
+        onClick: () => {
+          if (props.rotate === 0) {
+            props.setRotate(90);
+          } else {
+            props.setRotate(0);
+          }
+        },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { Icon: import_lucide_react3.RotateCw }),
+          " Rotacionar"
+        ]
+      }
+    )
   ] });
 }
 
@@ -616,6 +638,7 @@ function Core({ show, setShow }) {
   const [opacity, setOpacity] = (0, import_react2.useState)(0.3);
   const [color, setColor] = (0, import_react2.useState)("#d71212");
   const [showConfig, setShowConfig] = (0, import_react2.useState)(false);
+  const [rotate, setRotate] = (0, import_react2.useState)(0);
   (0, import_react2.useEffect)(() => {
     const handler = (e) => {
       if (e.ctrlKey && e.key === ";") {
@@ -642,7 +665,8 @@ function Core({ show, setShow }) {
                 transparent 1px,
                 transparent ${gap}px
               )`,
-            opacity
+            opacity,
+            transform: `rotate(${rotate}deg)`
           }
         }
       ),
@@ -666,6 +690,8 @@ function Core({ show, setShow }) {
     showConfig && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
       ConfigOptions,
       {
+        rotate,
+        setRotate,
         lines,
         gap,
         opacity,
@@ -705,7 +731,7 @@ function LinesOverlay() {
             },
             onClick: () => setShow((v) => !v),
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Icon, { Icon: import_lucide_react3.Eye, size: "xl" }),
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Icon, { Icon: import_lucide_react4.Eye, size: "xl" }),
               "Mostrar linhas - ",
               /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { style: { color: "#787878ff" }, children: "Ctrl + ;" })
             ]

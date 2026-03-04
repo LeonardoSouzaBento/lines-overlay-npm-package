@@ -381,6 +381,9 @@ function ConfigButton({
   ] });
 }
 
+// src/components/config-options.tsx
+import { RotateCw } from "lucide-react";
+
 // src/components/data.ts
 var NUMBER_FIELDS = [
   {
@@ -545,7 +548,26 @@ function ConfigOptions(props) {
         },
         c.value
       )) })
-    ] })
+    ] }),
+    /* @__PURE__ */ jsxs3(
+      Button,
+      {
+        variant: "ghost",
+        size: "sm",
+        style: { maxWidth: "max-content" },
+        onClick: () => {
+          if (props.rotate === 0) {
+            props.setRotate(90);
+          } else {
+            props.setRotate(0);
+          }
+        },
+        children: [
+          /* @__PURE__ */ jsx6(Icon, { Icon: RotateCw }),
+          " Rotacionar"
+        ]
+      }
+    )
   ] });
 }
 
@@ -580,6 +602,7 @@ function Core({ show, setShow }) {
   const [opacity, setOpacity] = useState(0.3);
   const [color, setColor] = useState("#d71212");
   const [showConfig, setShowConfig] = useState(false);
+  const [rotate, setRotate] = useState(0);
   useEffect(() => {
     const handler = (e) => {
       if (e.ctrlKey && e.key === ";") {
@@ -606,7 +629,8 @@ function Core({ show, setShow }) {
                 transparent 1px,
                 transparent ${gap}px
               )`,
-            opacity
+            opacity,
+            transform: `rotate(${rotate}deg)`
           }
         }
       ),
@@ -630,6 +654,8 @@ function Core({ show, setShow }) {
     showConfig && /* @__PURE__ */ jsx7(
       ConfigOptions,
       {
+        rotate,
+        setRotate,
         lines,
         gap,
         opacity,

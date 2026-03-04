@@ -12,6 +12,8 @@ export type ConfigOptionsProps = {
   setGap: (v: number) => void;
   setOpacity: (v: number) => void;
   setColor: (v: string) => void;
+  rotate: number;
+  setRotate: (v: number) => void;
 };
 
 export type NumberFieldConfig = {

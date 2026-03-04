@@ -1,4 +1,5 @@
-import { Button } from '../ui';
+import { RotateCw } from "lucide-react";
+import { Button, Icon } from "../ui";
 import { type ConfigOptionsProps, NUMBER_FIELDS, colorOptions } from "./data";
 
 const css = {
@@ -144,6 +145,21 @@ export function ConfigOptions(props: ConfigOptionsProps) {
           ))}
         </div>
       </div>
+
+      <Button
+        variant="ghost"
+        size="sm"
+        style={{ maxWidth: "max-content" }}
+        onClick={() => {
+          if (props.rotate === 0) {
+            props.setRotate(90);
+          } else {
+            props.setRotate(0);
+          }
+        }}
+      >
+        <Icon Icon={RotateCw} /> Rotacionar
+      </Button>
     </div>
   );
 }

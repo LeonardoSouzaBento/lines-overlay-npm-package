@@ -43,6 +43,7 @@ function Core({ show, setShow }: Props) {
   const [opacity, setOpacity] = useState(0.3);
   const [color, setColor] = useState("#d71212");
   const [showConfig, setShowConfig] = useState(false);
+  const [rotate, setRotate] = useState(0);
 
   // Toggle por tecla
   useEffect(() => {
@@ -75,6 +76,7 @@ function Core({ show, setShow }: Props) {
                 transparent ${gap}px
               )`,
             opacity,
+            transform: `rotate(${rotate}deg)`,
           }}
         />
         {/* Move */}
@@ -92,6 +94,8 @@ function Core({ show, setShow }: Props) {
       />
       {showConfig && (
         <ConfigOptions
+          rotate={rotate}
+          setRotate={setRotate}
           lines={lines}
           gap={gap}
           opacity={opacity}
