@@ -557,14 +557,15 @@ function ConfigOptions(props) {
 import { Fragment, jsx as jsx7, jsxs as jsxs3 } from "react/jsx-runtime";
 var css6 = {
   overlay: {
-    position: "absolute",
+    position: "fixed",
     top: 175,
     left: 0,
     width: "100%",
     pointerEvents: "none",
     display: "flex",
     justifyContent: "center",
-    zIndex: 10
+    zIndex: 10,
+    touchAction: "none"
   },
   grid: {
     width: "100%"
@@ -654,8 +655,8 @@ function LinesOverlay() {
         zIndex: 9e3,
         bottom: 0,
         left: 0,
-        width: "100%",
-        height: "100dvh",
+        width: "max-content",
+        height: "max-content",
         fontFamily: "Inter, sans-serif"
       },
       children: [

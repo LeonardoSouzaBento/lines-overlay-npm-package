@@ -15,7 +15,7 @@ type Props = {
 
 const css = {
   overlay: {
-    position: "absolute" as const,
+    position: "fixed" as const,
     top: 175,
     left: 0,
     width: "100%",
@@ -23,6 +23,7 @@ const css = {
     display: "flex",
     justifyContent: "center",
     zIndex: 10,
+    touchAction: "none" as const,
   },
   grid: {
     width: "100%",
@@ -117,8 +118,8 @@ export function LinesOverlay() {
         zIndex: 9000,
         bottom: 0,
         left: 0,
-        width: "100%",
-        height: "100dvh",
+        width: "max-content",
+        height: "max-content",
         fontFamily: "Inter, sans-serif",
       }}
     >
