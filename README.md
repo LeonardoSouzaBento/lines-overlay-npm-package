@@ -26,19 +26,19 @@ Este pacote assume que o seu projeto já usa:
 ## Uso básico
 
 ```tsx
-import { RowGrid } from 'lines-overlay';
+import { LinesOverlay } from 'lines-overlay';
 
 export function App() {
   return (
     <div>
       {/* Sua interface normal aqui */}
-      <RowGrid />
+      <LinesOverlay />
     </div>
   );
 }
 ```
 
-Ao incluir o componente `RowGrid` em qualquer lugar do seu aplicativo React, um botão “Mostrar linhas” aparece fixo no canto inferior direito.
+Ao incluir o componente `LinesOverlay` em qualquer lugar do seu aplicativo React, um botão “Mostrar linhas” aparece fixo no canto inferior direito.
 
 - **Atalho de teclado**  
 - `Ctrl + ;` também alterna entre mostrar/ocultar as linhas.
