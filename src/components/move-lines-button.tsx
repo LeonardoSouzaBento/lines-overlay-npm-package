@@ -12,7 +12,7 @@ const css = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    pointerEvents: "auto",
+    pointerEvents: "auto" as const,
   },
   button: {
     backgroundColor: "rgba(255,255,255,0.75)",

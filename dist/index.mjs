@@ -282,7 +282,6 @@ var css4 = {
     bottom: 8,
     right: 8,
     zIndex: 9999,
-    pointerEvents: "auto",
     height: 40,
     border: "1px solid rgba(148,163,184,0.5)",
     backgroundColor: "rgba(255,255,255,0.70)",
@@ -291,6 +290,7 @@ var css4 = {
     alignItems: "center",
     paddingLeft: 14,
     paddingRight: 4,
+    pointerEvents: "auto",
     borderRadius: 4
   },
   label: {
@@ -450,11 +450,13 @@ var css5 = {
   quickRow: {
     display: "flex",
     gap: 6,
-    marginTop: 4
+    marginTop: 4,
+    pointerEvents: "auto"
   },
   quickButton: {
     fontWeight: 500,
-    borderRadius: 999
+    borderRadius: 999,
+    pointerEvents: "auto"
   },
   colorSection: {
     marginBottom: 12
@@ -473,7 +475,8 @@ var css5 = {
     display: "block",
     width: "80%",
     height: "80%",
-    borderRadius: 999
+    borderRadius: 999,
+    pointerEvents: "auto"
   }
 };
 function ConfigOptions(props) {
@@ -575,7 +578,8 @@ var css6 = {
     bottom: 8,
     right: 8,
     zIndex: 20,
-    backgroundColor: "rgba(255,255,255,0.70)"
+    backgroundColor: "rgba(255,255,255,0.70)",
+    pointerEvents: "auto"
   }
 };
 function Core({ show, setShow }) {
@@ -655,9 +659,10 @@ function LinesOverlay() {
         zIndex: 9e3,
         bottom: 0,
         left: 0,
-        width: "max-content",
-        height: "max-content",
-        fontFamily: "Inter, sans-serif"
+        width: "100%",
+        height: "100dvh",
+        fontFamily: "Inter, sans-serif",
+        pointerEvents: "none"
       },
       children: [
         /* @__PURE__ */ jsx7(Core, { setShow, show }),
@@ -668,7 +673,8 @@ function LinesOverlay() {
             variant: "ghost",
             style: {
               ...css6.triggerButton,
-              visibility: show ? "hidden" : "visible"
+              visibility: show ? "hidden" : "visible",
+              pointerEvents: "auto"
             },
             onClick: () => setShow((v) => !v),
             children: [

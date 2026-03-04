@@ -55,10 +55,12 @@ const css = {
     display: "flex",
     gap: 6,
     marginTop: 4,
+    pointerEvents: "auto" as const,
   },
   quickButton: {
     fontWeight: 500,
     borderRadius: 999,
+    pointerEvents: "auto" as const,
   },
   colorSection: {
     marginBottom: 12,
@@ -78,6 +80,7 @@ const css = {
     width: "80%",
     height: "80%",
     borderRadius: 999,
+    pointerEvents: "auto" as const,
   },
 } as const;
 

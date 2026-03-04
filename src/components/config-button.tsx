@@ -9,7 +9,6 @@ const css = {
     bottom: 8,
     right: 8,
     zIndex: 9999,
-    pointerEvents: "auto",
     height: 40,
     border: "1px solid rgba(148,163,184,0.5)",
     backgroundColor: "rgba(255,255,255,0.70)",
@@ -18,6 +17,7 @@ const css = {
     alignItems: "center",
     paddingLeft: 14,
     paddingRight: 4,
+    pointerEvents: "auto" as const,
     borderRadius: 4,
   },
   label: {

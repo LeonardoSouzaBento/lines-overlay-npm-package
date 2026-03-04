@@ -34,6 +34,7 @@ const css = {
     right: 8,
     zIndex: 20,
     backgroundColor: "rgba(255,255,255,0.70)",
+    pointerEvents: "auto" as const,
   },
 } as const;
 
@@ -118,9 +119,10 @@ export function LinesOverlay() {
         zIndex: 9000,
         bottom: 0,
         left: 0,
-        width: "max-content",
-        height: "max-content",
+        width: "100%",
+        height: "100dvh",
         fontFamily: "Inter, sans-serif",
+        pointerEvents: "none" as const,
       }}
     >
       <Core setShow={setShow} show={show} />
@@ -131,6 +133,7 @@ export function LinesOverlay() {
         style={{
           ...css.triggerButton,
           visibility: show ? "hidden" : "visible",
+          pointerEvents: "auto" as const,
         }}
         onClick={() => setShow((v) => !v)}
       >
