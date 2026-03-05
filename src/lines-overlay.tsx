@@ -40,7 +40,7 @@ const css = {
 
 function Core({ show, setShow }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [lines, setLines] = useState(12);
+  const [lines, setLines] = useState(4);
   const [gap, setGap] = useState(24);
   const [opacity, setOpacity] = useState(0.3);
   const [color, setColor] = useState("#d71212");

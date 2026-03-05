@@ -33,7 +33,7 @@ export const NUMBER_FIELDS: NumberFieldConfig[] = [
   {
     key: 'gap',
     label: 'Gap',
-    quick: [16, 24, 32, 40, 44],
+    quick: [24, 32, 40, 48],
     step: 4,
   },
   {

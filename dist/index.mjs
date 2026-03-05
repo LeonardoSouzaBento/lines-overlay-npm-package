@@ -377,7 +377,7 @@ var NUMBER_FIELDS = [
   {
     key: "gap",
     label: "Gap",
-    quick: [16, 24, 32, 40, 44],
+    quick: [24, 32, 40, 48],
     step: 4
   },
   {
@@ -584,7 +584,7 @@ var css6 = {
 };
 function Core({ show, setShow }) {
   const containerRef = useRef2(null);
-  const [lines, setLines] = useState(12);
+  const [lines, setLines] = useState(4);
   const [gap, setGap] = useState(24);
   const [opacity, setOpacity] = useState(0.3);
   const [color, setColor] = useState("#d71212");
